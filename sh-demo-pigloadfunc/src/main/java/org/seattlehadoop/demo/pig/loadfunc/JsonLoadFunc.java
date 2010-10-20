@@ -1,7 +1,6 @@
 package org.seattlehadoop.demo.pig.loadfunc;
 
 import java.io.IOException;
-import java.util.Arrays;
 
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
@@ -18,14 +17,13 @@ import org.apache.pig.backend.hadoop.executionengine.mapReduceLayer.PigSplit;
 import org.apache.pig.data.Tuple;
 import org.apache.pig.data.TupleFactory;
 import org.codehaus.jackson.JsonFactory;
-import org.codehaus.jackson.JsonGenerator;
+import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.JsonToken;
 
 public class JsonLoadFunc extends LoadFunc {
 
 	private final String[] m_fieldNames;
-	private final String m_subPath;
 	private RecordReader<LongWritable, Text> m_in;
 	private final TupleFactory mTupleFactory = TupleFactory.getInstance();
 	private final JsonFactory m_jsonFactory;
@@ -34,56 +32,64 @@ public class JsonLoadFunc extends LoadFunc {
 		if (pathAndFields.length == 0) {
 			throw new IllegalArgumentException("Must have at least one arg, the subpath");
 		}
-		m_subPath = pathAndFields[0];
-		m_fieldNames = Arrays.copyOfRange(pathAndFields, 1, pathAndFields.length - 1);
+		m_fieldNames = pathAndFields;
 		m_jsonFactory = new JsonFactory();
 	}
 
+	@Override
 	public void setLocation(String p_location, Job job) throws IOException {
-		FileInputFormat.setInputPaths(job, new Path(p_location, m_subPath));
+		FileInputFormat.setInputPaths(job, new Path(p_location));
 	}
 
 	@SuppressWarnings("rawtypes")
+	@Override
 	public InputFormat getInputFormat() throws IOException {
 		return new TextInputFormat();
 	}
 
 	@SuppressWarnings("unchecked")
+	@Override
 	public void prepareToRead(@SuppressWarnings("rawtypes") RecordReader p_reader, PigSplit p_split) throws IOException {
 		m_in = p_reader;
 	}
 
+	/**
+	 * Reads in the JSON formatted string, looking for the fields in
+	 * {@link #m_fieldNames}
+	 * 
+	 * @param bytes
+	 * @return
+	 * @throws JsonParseException
+	 * @throws IOException
+	 */
+	protected String[] getFieldsInOrder(byte[] bytes) throws JsonParseException, IOException {
+		JsonParser parser = m_jsonFactory.createJsonParser(bytes);
+		parser.nextToken();
+		String[] ret = new String[m_fieldNames.length];
+		while (parser.nextToken() != JsonToken.END_OBJECT) {
+			String fieldName = parser.getCurrentName();
+			for (int i = 0; i < m_fieldNames.length; i++) {
+				if (fieldName.equals(m_fieldNames[i])) {
+					ret[i] = parser.getText();
+					break;
+				}
+			}
+		}
+		return ret;
+	}
+
+	@Override
 	public Tuple getNext() throws IOException {
 		try {
 			boolean notDone = m_in.nextKeyValue();
 			if (!notDone) {
 				return null;
 			}
-			Text value = (Text) m_in.getCurrentValue();
-			JsonParser parser = m_jsonFactory.createJsonParser(value.getBytes());
-			parser.nextToken();
-			for (String field : m_fieldNames) {
-				if (field.equals(parser.getCurrentName())) {
-					
-				}
+			Tuple t = mTupleFactory.newTuple(m_fieldNames.length);
+			int fieldPos = 0;
+			for (String fieldValue : getFieldsInOrder(((Text) m_in.getCurrentValue()).getBytes())) {
+				t.set(fieldPos++, fieldValue);
 			}
-			JsonToken token = parser.nextToken();
-			
-			byte[] buf = value.getBytes();
-			int len = value.getLength();
-			int start = 0;
-
-			for (int i = 0; i < len; i++) {
-				if (buf[i] == fieldDel) {
-					readField(buf, start, i);
-					start = i + 1;
-				}
-			}
-			// pick up the last field
-			readField(buf, start, len);
-
-			Tuple t = mTupleFactory.newTupleNoCopy(mProtoTuple);
-			mProtoTuple = null;
 			return t;
 		} catch (InterruptedException e) {
 			int errCode = 6018;
@@ -92,4 +98,5 @@ public class JsonLoadFunc extends LoadFunc {
 		}
 
 	}
+
 }

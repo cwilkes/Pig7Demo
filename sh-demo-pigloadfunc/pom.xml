@@ -12,7 +12,25 @@
 	<packaging>jar</packaging>
 
 	<name>sh-demo-pigloadfunc</name>
-
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+						</manifest>
+						<manifestEntries>
+							<main-class>org.seattlehadoop.demo.pig.loadfunc.SequenceTarFileGenerator</main-class>							
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.hadoop</groupId>
