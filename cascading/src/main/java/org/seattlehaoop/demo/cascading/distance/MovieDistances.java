@@ -4,6 +4,7 @@ import static org.seattlehaoop.demo.cascading.distance.FlowUtils.makeLocalFlow;
 import cascading.flow.Flow;
 import cascading.operation.Identity;
 import cascading.operation.function.UnGroup;
+import cascading.operation.regex.RegexFilter;
 import cascading.operation.regex.RegexSplitter;
 import cascading.pipe.CoGroup;
 import cascading.pipe.Each;
@@ -11,6 +12,13 @@ import cascading.pipe.Pipe;
 import cascading.tuple.Fields;
 
 public class MovieDistances {
+
+	/**
+	 * First part is the movie name, second is the leftReviewer (and is the
+	 * matching column) and third is the score. This is repeated for the right
+	 * reviewer and score. The \\1 reference refers back to the left reviewer.
+	 */
+	private static final String MOVIE_RATING_REGEX = "^[^\\t]*\\t([^\\t]*)\\t[^\\t]*\\t\\1\\t.*";
 
 	private static final String MOVIE = "movie";
 	private final static String PERSON_LEFT = "nameLeft";
@@ -38,6 +46,9 @@ public class MovieDistances {
 		// the movie column is repeated in "movieRight", this also shows what
 		// columns we care about
 		pipe = new Each(pipe, new Fields(MOVIE, PERSON_LEFT, RATE_LEFT, PERSON_RIGHT, RATE_RIGHT), new Identity());
+
+		// the cogroup means that a reviewer was grouped against themselves
+		pipe = new Each(pipe, new RegexFilter(MOVIE_RATING_REGEX, true));
 
 		return pipe;
 	}
