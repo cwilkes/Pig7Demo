@@ -8,12 +8,13 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>sh-demo-pigloadfunc</module>
-    <module>cascading</module>
-  </modules>
+		<module>cascading</module>
+	</modules>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<hadoop.version>0.20.2-320</hadoop.version>
 		<jackson.version>1.0.1</jackson.version>
+		<cascading.version>1.1.2</cascading.version>
 	</properties>
 
 	<build>
@@ -30,6 +31,21 @@
 	</build>
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>org.cascading</groupId>
+				<artifactId>cascading-xml</artifactId>
+				<version>${cascading.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.cascading</groupId>
+				<artifactId>cascading-test</artifactId>
+				<version>${cascading.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.cascading</groupId>
+				<artifactId>cascading-core</artifactId>
+				<version>${cascading.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>org.codehaus.jackson</groupId>
 				<artifactId>jackson-core-asl</artifactId>

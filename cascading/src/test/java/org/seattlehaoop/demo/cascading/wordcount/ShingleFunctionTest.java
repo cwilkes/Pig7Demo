@@ -12,7 +12,7 @@ public class ShingleFunctionTest extends CascadingTestCase {
 
 	public void testMakeShingles() {
 		Fields resultFields = Fields.size(1);
-		TupleListCollector collector = invokeFunction(new ShingleFunction(new Fields("token"), 2), new Tuple("A Bb C"), resultFields);
+		TupleListCollector collector = null;//invokeFunction(new ShingleFunction(new Fields("token"), 2), new Tuple("A Bb C"), resultFields);
 		Iterator<TupleEntry> it = collector.entryIterator();
 		assertEquals("A", it.next().getString(0));
 		assertEquals("A Bb", it.next().getString(0));

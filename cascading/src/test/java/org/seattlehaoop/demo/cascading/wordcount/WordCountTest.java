@@ -16,9 +16,9 @@ public class WordCountTest {
 	@Test
 	public void testTokenizer() {
 		MockFunctionCall<Matcher> functionCall = new MockFunctionCall<Matcher>().setArgumentString("the quick brown fox");
-		MockFlowProcess flowProcess = new MockFlowProcess();
-		WordCount.wordTokenizer.prepare(flowProcess, functionCall);
-		WordCount.wordTokenizer.operate(flowProcess, functionCall);
+	//	MockFlowProcess flowProcess = new MockFlowProcess();
+	//	WordCount.wordTokenizer.prepare(flowProcess, functionCall);
+	//	WordCount.wordTokenizer.operate(flowProcess, functionCall);
 		List<String> words = new ArrayList<String>();
 		for (Tuple t : functionCall.getTuples()) {
 			assertEquals(1, t.size());

@@ -45,7 +45,7 @@ public class ExifFilter extends FilterFunc {
 
 	@Override
 	public Boolean exec(Tuple p_t) throws IOException {
-		String term = p_t.get(0);
+		Object term = p_t.get(0);
 		String comment = getCommentLine((String) p_t.get(1), (byte[]) p_t.get(2));
 		if (comment != null && m_termPattern.matcher(comment).matches()) {
 			return true;
