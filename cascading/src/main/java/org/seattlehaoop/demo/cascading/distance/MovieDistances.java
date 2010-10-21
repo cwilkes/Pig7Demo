@@ -31,6 +31,8 @@ public class MovieDistances {
 	private static final String RATE_LEFT = "rateLeft";
 	private static final String RATE_RIGHT = "rateRight";
 
+	private final static String RATING_SIMILIARITY_SCORE = "score";
+
 	public static Pipe makePipe() {
 		Pipe pipe = new Pipe("movieReviews");
 
@@ -63,6 +65,10 @@ public class MovieDistances {
 		// and only emit the first of these two rows
 		pipe = new GroupBy(pipe, Fields.ALL);
 		pipe = new Every(pipe, Fields.ALL, new First(), Fields.RESULTS);
+
+		// now create a similiarity score for that row (same movie) based on the
+		// two ratings
+		pipe = new Each(pipe, new Fields(RATE_LEFT, RATE_RIGHT), new SquareDiff(RATING_SIMILIARITY_SCORE), Fields.ALL);
 
 		return pipe;
 	}

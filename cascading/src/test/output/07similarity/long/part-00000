@@ -1,0 +1,111 @@
+American Psycho	LissaRosen	9.0	RickyBobby	10.0	1.0
+American Psycho	LissaRosen	9.0	TobyTheTobster	10.0	1.0
+American Psycho	RickyBobby	10.0	TobyTheTobster	10.0	0.0
+Exorist	ClaudiaPuig	8.9	GeneSeymour	7.3	2.560000000000002
+Exorist	ClaudiaPuig	8.9	JackMatthews	1.1	60.84000000000001
+Exorist	ClaudiaPuig	8.9	LissaRosen	2.8	37.21000000000001
+Exorist	ClaudiaPuig	8.9	MichaelPhillips	3.2	32.49
+Exorist	ClaudiaPuig	8.9	MickLaSalle	4.3	21.160000000000004
+Exorist	ClaudiaPuig	8.9	TobyTheTobster	9.9	1.0
+Exorist	GeneSeymour	7.3	JackMatthews	1.1	38.43999999999999
+Exorist	GeneSeymour	7.3	LissaRosen	2.8	20.25
+Exorist	GeneSeymour	7.3	MichaelPhillips	3.2	16.81
+Exorist	GeneSeymour	7.3	MickLaSalle	4.3	9.0
+Exorist	GeneSeymour	7.3	TobyTheTobster	9.9	6.7600000000000025
+Exorist	JackMatthews	1.1	LissaRosen	2.8	2.8899999999999992
+Exorist	JackMatthews	1.1	MichaelPhillips	3.2	4.41
+Exorist	JackMatthews	1.1	MickLaSalle	4.3	10.239999999999998
+Exorist	JackMatthews	1.1	TobyTheTobster	9.9	77.44000000000001
+Exorist	LissaRosen	2.8	MichaelPhillips	3.2	0.16000000000000028
+Exorist	LissaRosen	2.8	MickLaSalle	4.3	2.25
+Exorist	LissaRosen	2.8	TobyTheTobster	9.9	50.41000000000001
+Exorist	MichaelPhillips	3.2	MickLaSalle	4.3	1.2099999999999993
+Exorist	MichaelPhillips	3.2	TobyTheTobster	9.9	44.89
+Exorist	MickLaSalle	4.3	TobyTheTobster	9.9	31.360000000000007
+Just My Luck	ClaudiaPuig	3.0	GeneSeymour	1.5	2.25
+Just My Luck	ClaudiaPuig	3.0	JackMatthews	2.0	1.0
+Just My Luck	ClaudiaPuig	3.0	LissaRosen	3.0	0.0
+Just My Luck	ClaudiaPuig	3.0	MickLaSalle	2.0	1.0
+Just My Luck	GeneSeymour	1.5	JackMatthews	2.0	0.25
+Just My Luck	GeneSeymour	1.5	LissaRosen	3.0	2.25
+Just My Luck	GeneSeymour	1.5	MickLaSalle	2.0	0.25
+Just My Luck	JackMatthews	2.0	LissaRosen	3.0	1.0
+Just My Luck	JackMatthews	2.0	MickLaSalle	2.0	0.0
+Just My Luck	LissaRosen	3.0	MickLaSalle	2.0	1.0
+Lady in the Water	GeneSeymour	3.0	JackMatthews	3.0	0.0
+Lady in the Water	GeneSeymour	3.0	LissaRosen	2.5	0.25
+Lady in the Water	GeneSeymour	3.0	MichaelPhillips	2.5	0.25
+Lady in the Water	GeneSeymour	3.0	MickLaSalle	3.0	0.0
+Lady in the Water	JackMatthews	3.0	LissaRosen	2.5	0.25
+Lady in the Water	JackMatthews	3.0	MichaelPhillips	2.5	0.25
+Lady in the Water	JackMatthews	3.0	MickLaSalle	3.0	0.0
+Lady in the Water	LissaRosen	2.5	MichaelPhillips	2.5	0.0
+Lady in the Water	LissaRosen	2.5	MickLaSalle	3.0	0.25
+Lady in the Water	MichaelPhillips	2.5	MickLaSalle	3.0	0.25
+Snakes on a Plane	ClaudiaPuig	3.5	GeneSeymour	3.5	0.0
+Snakes on a Plane	ClaudiaPuig	3.5	JackMatthews	4.0	0.25
+Snakes on a Plane	ClaudiaPuig	3.5	LissaRosen	3.5	0.0
+Snakes on a Plane	ClaudiaPuig	3.5	MichaelPhillips	3.0	0.25
+Snakes on a Plane	ClaudiaPuig	3.5	MickLaSalle	4.0	0.25
+Snakes on a Plane	ClaudiaPuig	3.5	TobyTheTobster	4.5	1.0
+Snakes on a Plane	GeneSeymour	3.5	JackMatthews	4.0	0.25
+Snakes on a Plane	GeneSeymour	3.5	LissaRosen	3.5	0.0
+Snakes on a Plane	GeneSeymour	3.5	MichaelPhillips	3.0	0.25
+Snakes on a Plane	GeneSeymour	3.5	MickLaSalle	4.0	0.25
+Snakes on a Plane	GeneSeymour	3.5	TobyTheTobster	4.5	1.0
+Snakes on a Plane	JackMatthews	4.0	LissaRosen	3.5	0.25
+Snakes on a Plane	JackMatthews	4.0	MichaelPhillips	3.0	1.0
+Snakes on a Plane	JackMatthews	4.0	MickLaSalle	4.0	0.0
+Snakes on a Plane	JackMatthews	4.0	TobyTheTobster	4.5	0.25
+Snakes on a Plane	LissaRosen	3.5	MichaelPhillips	3.0	0.25
+Snakes on a Plane	LissaRosen	3.5	MickLaSalle	4.0	0.25
+Snakes on a Plane	LissaRosen	3.5	TobyTheTobster	4.5	1.0
+Snakes on a Plane	MichaelPhillips	3.0	MickLaSalle	4.0	1.0
+Snakes on a Plane	MichaelPhillips	3.0	TobyTheTobster	4.5	2.25
+Snakes on a Plane	MickLaSalle	4.0	TobyTheTobster	4.5	0.25
+Superman Returns	ClaudiaPuig	4.0	GeneSeymour	5.0	1.0
+Superman Returns	ClaudiaPuig	4.0	JackMatthews	5.0	1.0
+Superman Returns	ClaudiaPuig	4.0	LissaRosen	3.5	0.25
+Superman Returns	ClaudiaPuig	4.0	MichaelPhillips	3.5	0.25
+Superman Returns	ClaudiaPuig	4.0	MickLaSalle	3.0	1.0
+Superman Returns	ClaudiaPuig	4.0	TobyTheTobster	4.0	0.0
+Superman Returns	GeneSeymour	5.0	JackMatthews	5.0	0.0
+Superman Returns	GeneSeymour	5.0	LissaRosen	3.5	2.25
+Superman Returns	GeneSeymour	5.0	MichaelPhillips	3.5	2.25
+Superman Returns	GeneSeymour	5.0	MickLaSalle	3.0	4.0
+Superman Returns	GeneSeymour	5.0	TobyTheTobster	4.0	1.0
+Superman Returns	JackMatthews	5.0	LissaRosen	3.5	2.25
+Superman Returns	JackMatthews	5.0	MichaelPhillips	3.5	2.25
+Superman Returns	JackMatthews	5.0	MickLaSalle	3.0	4.0
+Superman Returns	JackMatthews	5.0	TobyTheTobster	4.0	1.0
+Superman Returns	LissaRosen	3.5	MichaelPhillips	3.5	0.0
+Superman Returns	LissaRosen	3.5	MickLaSalle	3.0	0.25
+Superman Returns	LissaRosen	3.5	TobyTheTobster	4.0	0.25
+Superman Returns	MichaelPhillips	3.5	MickLaSalle	3.0	0.25
+Superman Returns	MichaelPhillips	3.5	TobyTheTobster	4.0	0.25
+Superman Returns	MickLaSalle	3.0	TobyTheTobster	4.0	1.0
+The Night Listener	ClaudiaPuig	4.5	GeneSeymour	3.0	2.25
+The Night Listener	ClaudiaPuig	4.5	LissaRosen	3.0	2.25
+The Night Listener	ClaudiaPuig	4.5	MichaelPhillips	4.0	0.25
+The Night Listener	ClaudiaPuig	4.5	MickLaSalle	3.0	2.25
+The Night Listener	GeneSeymour	3.0	LissaRosen	3.0	0.0
+The Night Listener	GeneSeymour	3.0	MichaelPhillips	4.0	1.0
+The Night Listener	GeneSeymour	3.0	MickLaSalle	3.0	0.0
+The Night Listener	LissaRosen	3.0	MichaelPhillips	4.0	1.0
+The Night Listener	LissaRosen	3.0	MickLaSalle	3.0	0.0
+The Night Listener	MichaelPhillips	4.0	MickLaSalle	3.0	1.0
+You, Me and Dupree	ClaudiaPuig	2.5	GeneSeymour	3.5	1.0
+You, Me and Dupree	ClaudiaPuig	2.5	JackMatthews	3.5	1.0
+You, Me and Dupree	ClaudiaPuig	2.5	LissaRosen	2.5	0.0
+You, Me and Dupree	ClaudiaPuig	2.5	MickLaSalle	2.0	0.25
+You, Me and Dupree	ClaudiaPuig	2.5	TobyTheTobster	1.0	2.25
+You, Me and Dupree	GeneSeymour	3.5	JackMatthews	3.5	0.0
+You, Me and Dupree	GeneSeymour	3.5	LissaRosen	2.5	1.0
+You, Me and Dupree	GeneSeymour	3.5	MickLaSalle	2.0	2.25
+You, Me and Dupree	GeneSeymour	3.5	TobyTheTobster	1.0	6.25
+You, Me and Dupree	JackMatthews	3.5	LissaRosen	2.5	1.0
+You, Me and Dupree	JackMatthews	3.5	MickLaSalle	2.0	2.25
+You, Me and Dupree	JackMatthews	3.5	TobyTheTobster	1.0	6.25
+You, Me and Dupree	LissaRosen	2.5	MickLaSalle	2.0	0.25
+You, Me and Dupree	LissaRosen	2.5	TobyTheTobster	1.0	2.25
+You, Me and Dupree	MickLaSalle	2.0	TobyTheTobster	1.0	1.0
