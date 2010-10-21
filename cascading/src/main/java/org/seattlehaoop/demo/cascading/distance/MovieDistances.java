@@ -33,6 +33,8 @@ public class MovieDistances {
 
 	private final static String RATING_SIMILIARITY_SCORE = "score";
 
+	private final static String OUTPUT_DISTANCE = "distance";
+
 	public static Pipe makePipe() {
 		Pipe pipe = new Pipe("movieReviews");
 
@@ -73,7 +75,9 @@ public class MovieDistances {
 		// group by the same (user1,user2) columns, the 3rd column being the
 		// similarity score
 		pipe = new GroupBy(pipe, new Fields(PERSON_LEFT, PERSON_RIGHT));
-		
+
+		// calculate the overall score and put it into the field OUTPUT_DISTANCE
+		pipe = new Every(pipe, new Fields(RATING_SIMILIARITY_SCORE), new SumDistance(OUTPUT_DISTANCE), new Fields(PERSON_LEFT, PERSON_RIGHT, OUTPUT_DISTANCE));
 		return pipe;
 	}
 
