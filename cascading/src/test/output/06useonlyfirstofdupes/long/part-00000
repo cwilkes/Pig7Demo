@@ -1,0 +1,111 @@
+American Psycho	LissaRosen	9.0	RickyBobby	10.0
+American Psycho	LissaRosen	9.0	TobyTheTobster	10.0
+American Psycho	RickyBobby	10.0	TobyTheTobster	10.0
+Exorist	ClaudiaPuig	8.9	GeneSeymour	7.3
+Exorist	ClaudiaPuig	8.9	JackMatthews	1.1
+Exorist	ClaudiaPuig	8.9	LissaRosen	2.8
+Exorist	ClaudiaPuig	8.9	MichaelPhillips	3.2
+Exorist	ClaudiaPuig	8.9	MickLaSalle	4.3
+Exorist	ClaudiaPuig	8.9	TobyTheTobster	9.9
+Exorist	GeneSeymour	7.3	JackMatthews	1.1
+Exorist	GeneSeymour	7.3	LissaRosen	2.8
+Exorist	GeneSeymour	7.3	MichaelPhillips	3.2
+Exorist	GeneSeymour	7.3	MickLaSalle	4.3
+Exorist	GeneSeymour	7.3	TobyTheTobster	9.9
+Exorist	JackMatthews	1.1	LissaRosen	2.8
+Exorist	JackMatthews	1.1	MichaelPhillips	3.2
+Exorist	JackMatthews	1.1	MickLaSalle	4.3
+Exorist	JackMatthews	1.1	TobyTheTobster	9.9
+Exorist	LissaRosen	2.8	MichaelPhillips	3.2
+Exorist	LissaRosen	2.8	MickLaSalle	4.3
+Exorist	LissaRosen	2.8	TobyTheTobster	9.9
+Exorist	MichaelPhillips	3.2	MickLaSalle	4.3
+Exorist	MichaelPhillips	3.2	TobyTheTobster	9.9
+Exorist	MickLaSalle	4.3	TobyTheTobster	9.9
+Just My Luck	ClaudiaPuig	3.0	GeneSeymour	1.5
+Just My Luck	ClaudiaPuig	3.0	JackMatthews	2.0
+Just My Luck	ClaudiaPuig	3.0	LissaRosen	3.0
+Just My Luck	ClaudiaPuig	3.0	MickLaSalle	2.0
+Just My Luck	GeneSeymour	1.5	JackMatthews	2.0
+Just My Luck	GeneSeymour	1.5	LissaRosen	3.0
+Just My Luck	GeneSeymour	1.5	MickLaSalle	2.0
+Just My Luck	JackMatthews	2.0	LissaRosen	3.0
+Just My Luck	JackMatthews	2.0	MickLaSalle	2.0
+Just My Luck	LissaRosen	3.0	MickLaSalle	2.0
+Lady in the Water	GeneSeymour	3.0	JackMatthews	3.0
+Lady in the Water	GeneSeymour	3.0	LissaRosen	2.5
+Lady in the Water	GeneSeymour	3.0	MichaelPhillips	2.5
+Lady in the Water	GeneSeymour	3.0	MickLaSalle	3.0
+Lady in the Water	JackMatthews	3.0	LissaRosen	2.5
+Lady in the Water	JackMatthews	3.0	MichaelPhillips	2.5
+Lady in the Water	JackMatthews	3.0	MickLaSalle	3.0
+Lady in the Water	LissaRosen	2.5	MichaelPhillips	2.5
+Lady in the Water	LissaRosen	2.5	MickLaSalle	3.0
+Lady in the Water	MichaelPhillips	2.5	MickLaSalle	3.0
+Snakes on a Plane	ClaudiaPuig	3.5	GeneSeymour	3.5
+Snakes on a Plane	ClaudiaPuig	3.5	JackMatthews	4.0
+Snakes on a Plane	ClaudiaPuig	3.5	LissaRosen	3.5
+Snakes on a Plane	ClaudiaPuig	3.5	MichaelPhillips	3.0
+Snakes on a Plane	ClaudiaPuig	3.5	MickLaSalle	4.0
+Snakes on a Plane	ClaudiaPuig	3.5	TobyTheTobster	4.5
+Snakes on a Plane	GeneSeymour	3.5	JackMatthews	4.0
+Snakes on a Plane	GeneSeymour	3.5	LissaRosen	3.5
+Snakes on a Plane	GeneSeymour	3.5	MichaelPhillips	3.0
+Snakes on a Plane	GeneSeymour	3.5	MickLaSalle	4.0
+Snakes on a Plane	GeneSeymour	3.5	TobyTheTobster	4.5
+Snakes on a Plane	JackMatthews	4.0	LissaRosen	3.5
+Snakes on a Plane	JackMatthews	4.0	MichaelPhillips	3.0
+Snakes on a Plane	JackMatthews	4.0	MickLaSalle	4.0
+Snakes on a Plane	JackMatthews	4.0	TobyTheTobster	4.5
+Snakes on a Plane	LissaRosen	3.5	MichaelPhillips	3.0
+Snakes on a Plane	LissaRosen	3.5	MickLaSalle	4.0
+Snakes on a Plane	LissaRosen	3.5	TobyTheTobster	4.5
+Snakes on a Plane	MichaelPhillips	3.0	MickLaSalle	4.0
+Snakes on a Plane	MichaelPhillips	3.0	TobyTheTobster	4.5
+Snakes on a Plane	MickLaSalle	4.0	TobyTheTobster	4.5
+Superman Returns	ClaudiaPuig	4.0	GeneSeymour	5.0
+Superman Returns	ClaudiaPuig	4.0	JackMatthews	5.0
+Superman Returns	ClaudiaPuig	4.0	LissaRosen	3.5
+Superman Returns	ClaudiaPuig	4.0	MichaelPhillips	3.5
+Superman Returns	ClaudiaPuig	4.0	MickLaSalle	3.0
+Superman Returns	ClaudiaPuig	4.0	TobyTheTobster	4.0
+Superman Returns	GeneSeymour	5.0	JackMatthews	5.0
+Superman Returns	GeneSeymour	5.0	LissaRosen	3.5
+Superman Returns	GeneSeymour	5.0	MichaelPhillips	3.5
+Superman Returns	GeneSeymour	5.0	MickLaSalle	3.0
+Superman Returns	GeneSeymour	5.0	TobyTheTobster	4.0
+Superman Returns	JackMatthews	5.0	LissaRosen	3.5
+Superman Returns	JackMatthews	5.0	MichaelPhillips	3.5
+Superman Returns	JackMatthews	5.0	MickLaSalle	3.0
+Superman Returns	JackMatthews	5.0	TobyTheTobster	4.0
+Superman Returns	LissaRosen	3.5	MichaelPhillips	3.5
+Superman Returns	LissaRosen	3.5	MickLaSalle	3.0
+Superman Returns	LissaRosen	3.5	TobyTheTobster	4.0
+Superman Returns	MichaelPhillips	3.5	MickLaSalle	3.0
+Superman Returns	MichaelPhillips	3.5	TobyTheTobster	4.0
+Superman Returns	MickLaSalle	3.0	TobyTheTobster	4.0
+The Night Listener	ClaudiaPuig	4.5	GeneSeymour	3.0
+The Night Listener	ClaudiaPuig	4.5	LissaRosen	3.0
+The Night Listener	ClaudiaPuig	4.5	MichaelPhillips	4.0
+The Night Listener	ClaudiaPuig	4.5	MickLaSalle	3.0
+The Night Listener	GeneSeymour	3.0	LissaRosen	3.0
+The Night Listener	GeneSeymour	3.0	MichaelPhillips	4.0
+The Night Listener	GeneSeymour	3.0	MickLaSalle	3.0
+The Night Listener	LissaRosen	3.0	MichaelPhillips	4.0
+The Night Listener	LissaRosen	3.0	MickLaSalle	3.0
+The Night Listener	MichaelPhillips	4.0	MickLaSalle	3.0
+You, Me and Dupree	ClaudiaPuig	2.5	GeneSeymour	3.5
+You, Me and Dupree	ClaudiaPuig	2.5	JackMatthews	3.5
+You, Me and Dupree	ClaudiaPuig	2.5	LissaRosen	2.5
+You, Me and Dupree	ClaudiaPuig	2.5	MickLaSalle	2.0
+You, Me and Dupree	ClaudiaPuig	2.5	TobyTheTobster	1.0
+You, Me and Dupree	GeneSeymour	3.5	JackMatthews	3.5
+You, Me and Dupree	GeneSeymour	3.5	LissaRosen	2.5
+You, Me and Dupree	GeneSeymour	3.5	MickLaSalle	2.0
+You, Me and Dupree	GeneSeymour	3.5	TobyTheTobster	1.0
+You, Me and Dupree	JackMatthews	3.5	LissaRosen	2.5
+You, Me and Dupree	JackMatthews	3.5	MickLaSalle	2.0
+You, Me and Dupree	JackMatthews	3.5	TobyTheTobster	1.0
+You, Me and Dupree	LissaRosen	2.5	MickLaSalle	2.0
+You, Me and Dupree	LissaRosen	2.5	TobyTheTobster	1.0
+You, Me and Dupree	MickLaSalle	2.0	TobyTheTobster	1.0

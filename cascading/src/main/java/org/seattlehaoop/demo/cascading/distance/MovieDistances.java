@@ -4,11 +4,14 @@ import static org.seattlehaoop.demo.cascading.distance.FlowUtils.makeLocalFlow;
 import cascading.assembly.SortElements;
 import cascading.flow.Flow;
 import cascading.operation.Identity;
+import cascading.operation.aggregator.First;
 import cascading.operation.function.UnGroup;
 import cascading.operation.regex.RegexFilter;
 import cascading.operation.regex.RegexSplitter;
 import cascading.pipe.CoGroup;
 import cascading.pipe.Each;
+import cascading.pipe.Every;
+import cascading.pipe.GroupBy;
 import cascading.pipe.Pipe;
 import cascading.tuple.Fields;
 
@@ -55,6 +58,11 @@ public class MovieDistances {
 		// "Mo1 Kim 2.3 Joe 1.1" Sort the column grouping so
 		// have two rows that are exactly the same: "Mo1 Joe 1.1 Kim 2.3"
 		pipe = new Each(pipe, new SortElements(new Fields(PERSON_LEFT, RATE_LEFT), new Fields(PERSON_RIGHT, RATE_RIGHT)));
+
+		// with have the rows being the same unique the result set
+		// and only emit the first of these two rows
+		pipe = new GroupBy(pipe, Fields.ALL);
+		pipe = new Every(pipe, Fields.ALL, new First(), Fields.RESULTS);
 
 		return pipe;
 	}
