@@ -70,6 +70,10 @@ public class MovieDistances {
 		// two ratings
 		pipe = new Each(pipe, new Fields(RATE_LEFT, RATE_RIGHT), new SquareDiff(RATING_SIMILIARITY_SCORE), Fields.ALL);
 
+		// group by the same (user1,user2) columns, the 3rd column being the
+		// similarity score
+		pipe = new GroupBy(pipe, new Fields(PERSON_LEFT, PERSON_RIGHT));
+		
 		return pipe;
 	}
 
