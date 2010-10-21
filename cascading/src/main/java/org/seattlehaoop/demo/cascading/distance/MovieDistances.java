@@ -1,6 +1,7 @@
 package org.seattlehaoop.demo.cascading.distance;
 
 import static org.seattlehaoop.demo.cascading.distance.FlowUtils.makeLocalFlow;
+import cascading.assembly.SortElements;
 import cascading.flow.Flow;
 import cascading.operation.Identity;
 import cascading.operation.function.UnGroup;
@@ -49,6 +50,11 @@ public class MovieDistances {
 
 		// the cogroup means that a reviewer was grouped against themselves
 		pipe = new Each(pipe, new RegexFilter(MOVIE_RATING_REGEX, true));
+
+		// now have lines like "Mo1 Joe 1.1 Kim 2.3" as well as
+		// "Mo1 Kim 2.3 Joe 1.1" Sort the column grouping so
+		// have two rows that are exactly the same: "Mo1 Joe 1.1 Kim 2.3"
+		pipe = new Each(pipe, new SortElements(new Fields(PERSON_LEFT, RATE_LEFT), new Fields(PERSON_RIGHT, RATE_RIGHT)));
 
 		return pipe;
 	}
