@@ -2,6 +2,7 @@ package org.seattlehaoop.demo.cascading.distance;
 
 import static org.seattlehaoop.demo.cascading.distance.FlowUtils.makeLocalFlow;
 import cascading.flow.Flow;
+import cascading.operation.Identity;
 import cascading.operation.function.UnGroup;
 import cascading.operation.regex.RegexSplitter;
 import cascading.pipe.CoGroup;
@@ -33,6 +34,10 @@ public class MovieDistances {
 		// row now has 6 columns total --
 		// two pairs of (name,movie,rating)
 		pipe = new CoGroup(pipe, new Fields(MOVIE), 1, new Fields(PERSON_LEFT, MOVIE, RATE_LEFT, PERSON_RIGHT, "movieRight", RATE_RIGHT));
+
+		// the movie column is repeated in "movieRight", this also shows what
+		// columns we care about
+		pipe = new Each(pipe, new Fields(MOVIE, PERSON_LEFT, RATE_LEFT, PERSON_RIGHT, RATE_RIGHT), new Identity());
 
 		return pipe;
 	}
