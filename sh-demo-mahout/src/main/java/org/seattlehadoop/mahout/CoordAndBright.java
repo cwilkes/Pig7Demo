@@ -7,6 +7,11 @@ public class CoordAndBright {
 	private final double m_brightness;
 	private final Coord m_coord;
 
+	public static CoordAndBright valueOf(String line) {
+		int lastTab = line.lastIndexOf(TAB);
+		return new CoordAndBright(Coord.valueOf(line.substring(0, lastTab)), Double.valueOf(line.substring(lastTab + 1)));
+	}
+
 	public CoordAndBright(Coord center, double brightness) {
 		m_coord = center;
 		m_brightness = brightness;

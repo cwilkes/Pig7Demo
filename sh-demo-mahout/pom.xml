@@ -24,6 +24,10 @@
 			<groupId>org.apache.mahout</groupId>
 			<artifactId>mahout-core</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>			
+		</dependency>
 	</dependencies>
 	<profiles>
 		<profile>
