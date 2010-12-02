@@ -16,7 +16,8 @@ public class Utils {
 			ClassNotFoundException {
 		final Class<ClusterService<T>> clazz;
 		if (clusterName.startsWith(MINI_CLASS_NAME_PREFIX)) {
-			clazz = (Class<ClusterService<T>>) Class.forName(clusterName.substring(MINI_CLASS_NAME_PREFIX.length()));
+			clazz = (Class<ClusterService<T>>) Class.forName(PlanetCluster1.class.getPackage().getName() + "."
+					+ clusterName.substring(MINI_CLASS_NAME_PREFIX.length()));
 		} else {
 			clazz = (Class<ClusterService<T>>) Class.forName(clusterName);
 		}

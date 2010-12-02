@@ -24,8 +24,7 @@ public class ClusterKey {
 	}
 
 	public static ClusterKey makeFromString(String line) {
-		line = line.substring(line.lastIndexOf(Utils.TAB));
-		System.out.println(">" + line + "<");
+		line = line.substring(line.lastIndexOf(Utils.TAB) + 1);
 		String itemNumber = line.substring(line.lastIndexOf("-"));
 		return new ClusterKey(line.substring(0, line.length() - itemNumber.length()), Integer.parseInt(itemNumber.substring(1)));
 	}
