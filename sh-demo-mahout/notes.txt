@@ -1,0 +1,22 @@
+NOTES FOR R
+
+Get R for the mac:
+  http://cran.r-project.org/bin/macosx/
+get both the R-2.XX.X.pkg and the TCLTK-8.X.dmg under tools
+
+install R and then TCLTK.  
+ln -s /Library/Frameworks/R.framework/Resources/bin/R /usr/bin/R
+
+to test out:
+  R   # gets into shell
+  cars <- c(1, 3, 6, 4, 9)
+  plot(cars)
+# to show how to make circles of different size
+  x <- c( 3,5,10)
+  y <- c( 6,10,30)
+  plot(x,y)
+  s <- c( 1,2, 10)
+  symbols(x,y,circles=s)
+
+You can hit Control-Z and then type bash commands.  Type "fg" to go back into the shell
+-------
