@@ -1,0 +1,29 @@
+mvn clean package -Pfull
+
+d=target/x
+rm -rf $d 
+mkdir $d
+cd $d
+unzip ../sh-demo-mahout-1.0-SNAPSHOT-dist.zip
+./bin/mdemo.sh -t sh.PlanetCluster1
+
+cd ../..
+mvn package
+d=target/x
+cd $d
+cp ../sh-demo-mahout-1.0-SNAPSHOT.jar lib
+./bin/mdemo.sh -t sh.PlanetCluster1 -c 10 -b 10 -r 100 -t sh.PlanetCluster2
+more output/my-planetsData.tsv 
+
+./bin/mdemo.sh -t sh.PlanetCluster1 -c 3 -b 100
+
+./bin/mdemo.sh -t sh.PlanetCluster1 -c 10 -b 10 -r 100 -t sh.PlanetCluster2
+
+R
+
+./bin/mdemo.sh -t sh.PlanetCluster1 -c 10 -b 10 -r 100 -t sh.PlanetCluster2
+
+planets <- read.table("output/my-planetsData.tsv", header=TRUE)
+symbols(planets$X, planets$Y, planets$BRIGHT, inches=FALSE)
+
+#plot(planets$X, planets$Y, pch=planets$CLUSTER)
