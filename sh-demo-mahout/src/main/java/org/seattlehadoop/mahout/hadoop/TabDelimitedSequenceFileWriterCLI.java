@@ -7,11 +7,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import org.apache.hadoop.io.Text;
 import org.apache.mahout.common.Pair;
-import org.apache.mahout.math.VectorWritable;
 import org.seattlehadoop.mahout.Utils;
 
 import uk.co.flamingpenguin.jewel.cli.ArgumentValidationException;
@@ -23,7 +24,12 @@ import com.google.common.primitives.Doubles;
 
 public class TabDelimitedSequenceFileWriterCLI {
 
+	private static final Pattern CONVERTER_PAIR_CLASSNAME = Pattern.compile("^.*org.apache.mahout.common.Pair<(.*), (.*?)>>$");
+
 	public static interface TabDelimitedSequenceFileWriterOptions {
+
+		@Option(longName = "keepheader")
+		boolean keepheader();
 
 		@Option(shortName = "r")
 		boolean isReading();
@@ -38,34 +44,88 @@ public class TabDelimitedSequenceFileWriterCLI {
 		String getOutputDirectory();
 	}
 
-	@SuppressWarnings("unchecked")
-	public static void main(String[] args) throws SecurityException, IOException, InterruptedException, NoSuchMethodException, ClassNotFoundException,
-			InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		TabDelimitedSequenceFileWriterOptions parser = null;
+	private static TabDelimitedSequenceFileWriterOptions parseCommandLine(String[] p_args) {
 		try {
-			parser = parseArguments(TabDelimitedSequenceFileWriterOptions.class, args);
+			return parseArguments(TabDelimitedSequenceFileWriterOptions.class, p_args);
 		} catch (ArgumentValidationException e) {
 			System.err.println(e.getMessage());
 			System.exit(1);
+			return null;
 		}
-		if (parser.isReading()) {
-			Iterator<Pair<String, double[]>> it = new VectorSequenceFileReader(new File(parser.getInputFile()));
-			while (it.hasNext()) {
-				Pair<String, double[]> pair = it.next();
-				System.out.println(pair.getFirst() + Utils.TAB + Doubles.join(" ", pair.getSecond()));
-			}
-			System.exit(0);
+	}
+
+	public static void printOutSequenceFile(File file) throws IOException, InterruptedException {
+		Iterator<Pair<String, double[]>> it = new VectorSequenceFileReader(file);
+		while (it.hasNext()) {
+			Pair<String, double[]> pair = it.next();
+			System.out.println(pair.getFirst() + Utils.TAB + Doubles.join(" ", pair.getSecond()));
 		}
+	}
+
+	private static void checkForNonReading(TabDelimitedSequenceFileWriterOptions parser) {
 		if (parser.getLineConverter().equals("none") || parser.getOutputDirectory().equals("none")) {
 			System.out.println(CliFactory.createCli(TabDelimitedSequenceFileWriterOptions.class).getHelpMessage());
 			System.exit(1);
 		}
-		TabDelimitedSequenceFileWriter writer = new TabDelimitedSequenceFileWriter((Function<String, Pair<Text, VectorWritable>>) Class.forName(
-				parser.getLineConverter()).newInstance());
-		Reader reader = new FileReader(new File(parser.getInputFile()));
-		File outFile = File.createTempFile("vectors-", ".seq", new File(parser.getOutputDirectory()));
-		writer.process(reader, true, outFile);
+	}
+
+	private static class GenericFixer {
+
+		private final Function<String, Pair<Object, Object>> m_lineConverter;
+		@SuppressWarnings("rawtypes")
+		private final Class[] m_converterTypes;
+
+		@SuppressWarnings("unchecked")
+		public GenericFixer(String lineConverterClass) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+			m_lineConverter = (Function<String, Pair<Object, Object>>) Class.forName(lineConverterClass).newInstance();
+
+			String asString = m_lineConverter.getClass().getGenericInterfaces()[0].toString();
+			Matcher m = CONVERTER_PAIR_CLASSNAME.matcher(asString);
+			if (m.matches()) {
+				m_converterTypes = new Class[] { Class.forName(m.group(1)), Class.forName(m.group(2)) };
+			} else {
+				throw new IllegalStateException("Cannot find pair in " + asString);
+			}
+			System.err.println("Converter types: " + Arrays.toString(getConverterTypes()));
+		}
+
+		@SuppressWarnings("rawtypes")
+		public Class[] getConverterTypes() throws ClassNotFoundException {
+			return m_converterTypes;
+		}
+
+		@SuppressWarnings({ "unchecked", "rawtypes", "unused" })
+		public boolean isPairValueClass(Class desiredValue) throws ClassNotFoundException {
+			return getConverterTypes()[1].isAssignableFrom(desiredValue);
+		}
+
+	}
+
+	@SuppressWarnings("unchecked")
+	public static void main(String[] args) throws SecurityException, IOException, InterruptedException, NoSuchMethodException, ClassNotFoundException,
+			InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		TabDelimitedSequenceFileWriterOptions parser = parseCommandLine(args);
+		if (parser.isReading()) {
+			printOutSequenceFile(new File(parser.getInputFile()));
+			System.exit(0);
+		}
+		checkForNonReading(parser);
+		GenericFixer fixer = new GenericFixer(parser.getLineConverter());
+		File outputDir = new File(parser.getOutputDirectory());
+		outputDir.mkdirs();
+		createDataSequenceFile(fixer.m_lineConverter, fixer.getConverterTypes()[0], fixer.getConverterTypes()[1], new File(parser.getInputFile()),
+				!parser.keepheader(), outputDir);
+	}
+
+	public static <K, V> void createDataSequenceFile(Function<String, Pair<K, V>> lineConverter, Class<K> keyType, Class<V> valueType, File inputFile,
+			boolean skipHeaderLine, File outputDirectory) throws SecurityException, IOException, InterruptedException, NoSuchMethodException,
+			IllegalArgumentException, IllegalAccessException, InvocationTargetException {
+		TabDelimitedSequenceFileWriter<K, V> writer = new TabDelimitedSequenceFileWriter<K, V>(keyType, valueType, lineConverter);
+		Reader reader = new FileReader(inputFile);
+		File outFile = File.createTempFile("part-" + valueType.getSimpleName() + "-", ".seq", outputDirectory);
+		writer.process(reader, skipHeaderLine, outFile);
 		reader.close();
-		System.out.println("Output is: " + outFile);
+		System.out.println("Output for " + keyType.getName() + "," + valueType.getName() + " is : " + outFile);
+
 	}
 }

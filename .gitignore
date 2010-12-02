@@ -7,3 +7,6 @@ target
 */.project
 */.classpath
 sh-demo-mahout/.commands.txt.swp
+sh-demo-mahout/Rplots.pdf
+sh-demo-mahout/.RData
+sh-demo-mahout/.Rhistory

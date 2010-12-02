@@ -8,7 +8,6 @@ import java.lang.reflect.InvocationTargetException;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileUtil;
-import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.RecordWriter;
 import org.apache.hadoop.mapreduce.TaskAttemptContext;
@@ -16,25 +15,24 @@ import org.apache.hadoop.mapreduce.TaskAttemptID;
 import org.apache.hadoop.mapreduce.TaskID;
 import org.apache.hadoop.mapreduce.lib.output.SequenceFileOutputFormat;
 import org.apache.mahout.common.Pair;
-import org.apache.mahout.math.VectorWritable;
 
 import com.google.common.base.Function;
 
-public class TabDelimitedSequenceFileWriter {
+public class TabDelimitedSequenceFileWriter<KEY, VALUE> {
 
-	private final SequenceFileOutputFormat<Text, VectorWritable> m_output;
-	private final RecordWriter<Text, VectorWritable> m_recordWriter;
+	private final SequenceFileOutputFormat<KEY, VALUE> m_output;
+	private final RecordWriter<KEY, VALUE> m_recordWriter;
 	private final TaskAttemptContext m_taskAttemptContext;
 	private File m_tmpDir;
-	private final Function<String, Pair<Text, VectorWritable>> m_lineConverter;
+	private final Function<String, Pair<KEY, VALUE>> m_lineConverter;
 
-	public TabDelimitedSequenceFileWriter(Function<String, Pair<Text, VectorWritable>> lineConverter) throws IOException, InterruptedException,
-			SecurityException, NoSuchMethodException {
+	public TabDelimitedSequenceFileWriter(Class<KEY> keyClass, Class<VALUE> valueClass, Function<String, Pair<KEY, VALUE>> lineConverter) throws IOException,
+			InterruptedException, SecurityException, NoSuchMethodException {
 		m_lineConverter = lineConverter;
-		m_output = new SequenceFileOutputFormat<Text, VectorWritable>();
+		m_output = new SequenceFileOutputFormat<KEY, VALUE>();
 		Job job = new Job(new Configuration());
-		job.setOutputKeyClass(Text.class);
-		job.setOutputValueClass(VectorWritable.class);
+		job.setOutputKeyClass(keyClass);
+		job.setOutputValueClass(valueClass);
 		m_tmpDir = File.createTempFile(getClass().getName() + "-", ".tmp");
 		m_tmpDir.delete();
 		m_tmpDir.mkdirs();
@@ -60,11 +58,11 @@ public class TabDelimitedSequenceFileWriter {
 
 	public void writeFromLine(String line) throws IOException, InterruptedException, IllegalArgumentException, IllegalAccessException,
 			InvocationTargetException {
-		Pair<Text, VectorWritable> keyAndValue = m_lineConverter.apply(line);
+		Pair<KEY, VALUE> keyAndValue = m_lineConverter.apply(line);
 		write(keyAndValue.getFirst(), keyAndValue.getSecond());
 	}
 
-	public void write(Text key, VectorWritable value) throws IOException, InterruptedException {
+	public void write(KEY key, VALUE value) throws IOException, InterruptedException {
 		m_recordWriter.write(key, value);
 	}
 

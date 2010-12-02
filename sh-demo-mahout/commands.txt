@@ -13,6 +13,34 @@ d=target/x
 cd $d
 cp ../sh-demo-mahout-1.0-SNAPSHOT.jar lib
 
+
+./bin/mdemo.sh -t sh.PlanetCluster1 -c 10 -b 20 -r 100 -t sh.PlanetCluster2 -o data/in
+
+./bin/makevector.sh -c org.seattlehadoop.mahout.hadoop.CoordAndBrightnessConverter -o data/seq/ -f data/in/my-planetsData.tsv 
+
+./bin/makevector.sh -c org.seattlehadoop.mahout.hadoop.CoordAndBrightnessConverter -o data/seq/ -f output/my-planetsData.tsv 
+
+./bin/makevector.sh -r -f data/seq/part-*.seq > /tmp/inputs.txt 
+
+./bin/makevector.sh -c org.seattlehadoop.mahout.hadoop.ClusterMaker -f /tmp/inputs.txt  -o data/cluster/ --keepheader
+
+/usr/local/mahout-distribution-0.4/bin/mahout kmeans -i data/seq/ -c data/cluster/ -o output/kmeans -x 10 --clustering
+
+HADOOP_CLASSPATH=lib/\* hadoop fs -fs file:/// -text output/kmeans/clusters-3/part-r-00000  | makepoints.pl  > output/clusters.tsv
+
+R
+clusters <- read.table("output/clusters.tsv", header=TRUE)
+
+plot(clusters$X,clusters$Y)
+
+planets  <- read.table("data/in/my-planetsData.tsv", header=TRUE)
+clusters <- read.table("output/clusters.tsv", header=TRUE)
+xrange <- c(000,1000)
+yrange <- c(000,1000)
+symbols(clusters$X,clusters$Y, clusters$BRIGHT, inches=FALSE, xlim=xrange, ylim=yrange, bg="blue")
+symbols(planets$X,planets$Y, planets$BRIGHT, inches=FALSE, xlim=xrange, ylim=yrange, add=TRUE)
+
+
 ./bin/mdemo.sh -t sh.PlanetCluster1 -c 10 -b 10 -r 100 -t sh.PlanetCluster2
 ./bin/makevector.sh -c org.seattlehadoop.mahout.hadoop.CoordAndBrightnessConverter -o output < output/my-planetsData.tsv 
 
