@@ -1,7 +1,5 @@
 package org.seattlehadoop.mahout.hadoop;
 
-import java.util.Arrays;
-
 import org.apache.hadoop.io.Text;
 import org.apache.mahout.clustering.kmeans.Cluster;
 import org.apache.mahout.common.Pair;

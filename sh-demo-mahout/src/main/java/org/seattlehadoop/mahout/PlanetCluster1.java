@@ -36,8 +36,8 @@ public class PlanetCluster1 implements ClusterService<Coord> {
 		@Override
 		public Coord next() {
 			m_bodiesToGo--;
-			int x = (int) (m_centerX + 2 * m_radius * (m_random.nextDouble() - 0.5));
-			int y = (int) (m_centerY + 2 * m_radius * (m_random.nextDouble() - 0.5));
+			int x = (int) (m_centerX + 1.5 * m_radius * (m_random.nextDouble() - 0.5));
+			int y = (int) (m_centerY + 3 * m_radius * (m_random.nextDouble() - 0.5));
 			return new Coord(x, y);
 		}
 

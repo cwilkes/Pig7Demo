@@ -19,6 +19,7 @@ public class CoordAndBrightnessConverter implements Function<String, Pair<Text, 
 		int x = Integer.parseInt(parts[pos++]);
 		int y = Integer.parseInt(parts[pos++]);
 		double brightNess = Double.parseDouble(parts[pos++]);
-		return new Pair<Text, VectorWritable>(new Text(clusterName), new VectorWritable(new DenseVector(new double[] { x, y, brightNess })));
+		return new Pair<Text, VectorWritable>(new Text(clusterName),
+				new VectorWritable(new DenseVector(new double[] { x, y, brightNess })));
 	}
 }

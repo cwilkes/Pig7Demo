@@ -14,17 +14,25 @@ cd $d
 cp ../sh-demo-mahout-1.0-SNAPSHOT.jar lib
 
 
-./bin/mdemo.sh -t sh.PlanetCluster1 -c 10 -b 20 -r 100 -t sh.PlanetCluster2 -o data/in
+# create planet data
+./bin/mdemo.sh -t sh.PlanetCluster1 -c 10 -b 10 -r 100 -t sh.PlanetCluster2 -o data/in
 
+# CONDENSED STEPS
+
+# convert to SequenceFileFormat
 ./bin/makevector.sh -c org.seattlehadoop.mahout.hadoop.CoordAndBrightnessConverter -o data/seq/ -f data/in/my-planetsData.tsv 
-
-./bin/makevector.sh -c org.seattlehadoop.mahout.hadoop.CoordAndBrightnessConverter -o data/seq/ -f output/my-planetsData.tsv 
-
-./bin/makevector.sh -r -f data/seq/part-*.seq > /tmp/inputs.txt 
-
-./bin/makevector.sh -c org.seattlehadoop.mahout.hadoop.ClusterMaker -f /tmp/inputs.txt  -o data/cluster/ --keepheader
-
+# make some clusters
+./bin/makevector.sh -r -f data/seq/part-*.seq | selectdata.pl | ./bin/makevector.sh -c org.seattlehadoop.mahout.hadoop.ClusterMaker -f - -o data/cluster/
+# finally do kmeans
 /usr/local/mahout-distribution-0.4/bin/mahout kmeans -i data/seq/ -c data/cluster/ -o output/kmeans -x 10 --clustering
+
+
+
+
+# read that back to confirm
+./bin/makevector.sh -r -f data/seq/part-*.seq 
+
+/usr/local/mahout-distribution-0.4/bin/mahout kmeans -i data/seq/ -c data/cluster_badchoice/ -o output/kmeans_badchoice -x 10 --clustering
 
 HADOOP_CLASSPATH=lib/\* hadoop fs -fs file:/// -text output/kmeans/clusters-3/part-r-00000  | makepoints.pl  > output/clusters.tsv
 
@@ -33,12 +41,32 @@ clusters <- read.table("output/clusters.tsv", header=TRUE)
 
 plot(clusters$X,clusters$Y)
 
+
+R
+
 planets  <- read.table("data/in/my-planetsData.tsv", header=TRUE)
-clusters <- read.table("output/clusters.tsv", header=TRUE)
+clusters <- read.table("output/okay_clusters-1.tsv", header=TRUE)
 xrange <- c(000,1000)
 yrange <- c(000,1000)
+
 symbols(clusters$X,clusters$Y, clusters$BRIGHT, inches=FALSE, xlim=xrange, ylim=yrange, bg="blue")
+
 symbols(planets$X,planets$Y, planets$BRIGHT, inches=FALSE, xlim=xrange, ylim=yrange, add=TRUE)
+
+planets  <- read.table("data/in/my-planetsData.tsv", header=TRUE)
+clusters <- read.table("output/clusters2.tsv", header=TRUE)
+coordboxes <- matrix(c(clusters$WIDTH, clusters$HEIGHT), ncol=2)
+symbols(planets$X,planets$Y, planets$BRIGHT, inches=FALSE, xlim=xrange, ylim=yrange)
+symbols(clusters$X,clusters$Y, clusters$BRIGHT, inches=FALSE, xlim=xrange, ylim=yrange, bg="yellow", add=TRUE)
+symbols(clusters$X,clusters$Y, rectangles=coordboxes, inches=FALSE, xlim=xrange, ylim=yrange, add=TRUE)
+
+symbols(clusters$X,clusters$Y, rectangles=coordboxes, inches=FALSE, xlim=xrange, ylim=yrange, bg="white", add=TRUE)
+
+subdir=kmeans
+prefix=okay
+for i in 1 2 3 4; do 
+  java -cp lib/\* org.seattlehadoop.mahout.hadoop.BoxPlotWriter output/$subdir/clusters-$i/part-r-00000  > output/${prefix}_clusters-$i.tsv;
+done
 
 
 ./bin/mdemo.sh -t sh.PlanetCluster1 -c 10 -b 10 -r 100 -t sh.PlanetCluster2

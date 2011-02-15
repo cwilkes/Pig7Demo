@@ -5,6 +5,7 @@ import static uk.co.flamingpenguin.jewel.cli.CliFactory.parseArguments;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Reader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
@@ -78,7 +79,6 @@ public class TabDelimitedSequenceFileWriterCLI {
 		@SuppressWarnings("unchecked")
 		public GenericFixer(String lineConverterClass) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
 			m_lineConverter = (Function<String, Pair<Object, Object>>) Class.forName(lineConverterClass).newInstance();
-
 			String asString = m_lineConverter.getClass().getGenericInterfaces()[0].toString();
 			Matcher m = CONVERTER_PAIR_CLASSNAME.matcher(asString);
 			if (m.matches()) {
@@ -113,15 +113,15 @@ public class TabDelimitedSequenceFileWriterCLI {
 		GenericFixer fixer = new GenericFixer(parser.getLineConverter());
 		File outputDir = new File(parser.getOutputDirectory());
 		outputDir.mkdirs();
-		createDataSequenceFile(fixer.m_lineConverter, fixer.getConverterTypes()[0], fixer.getConverterTypes()[1], new File(parser.getInputFile()),
-				!parser.keepheader(), outputDir);
+		createDataSequenceFile(fixer.m_lineConverter, fixer.getConverterTypes()[0], fixer.getConverterTypes()[1], parser.getInputFile(), !parser.keepheader(),
+				outputDir);
 	}
 
-	public static <K, V> void createDataSequenceFile(Function<String, Pair<K, V>> lineConverter, Class<K> keyType, Class<V> valueType, File inputFile,
+	public static <K, V> void createDataSequenceFile(Function<String, Pair<K, V>> lineConverter, Class<K> keyType, Class<V> valueType, String inputFile,
 			boolean skipHeaderLine, File outputDirectory) throws SecurityException, IOException, InterruptedException, NoSuchMethodException,
 			IllegalArgumentException, IllegalAccessException, InvocationTargetException {
 		TabDelimitedSequenceFileWriter<K, V> writer = new TabDelimitedSequenceFileWriter<K, V>(keyType, valueType, lineConverter);
-		Reader reader = new FileReader(inputFile);
+		Reader reader = inputFile.equals("-") ? new InputStreamReader(System.in) : new FileReader(inputFile);
 		File outFile = File.createTempFile("part-" + valueType.getSimpleName() + "-", ".seq", outputDirectory);
 		writer.process(reader, skipHeaderLine, outFile);
 		reader.close();
