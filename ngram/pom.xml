@@ -25,5 +25,9 @@
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-core</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.cloudera.hadoop</groupId>
+			<artifactId>hadoop-mrunit</artifactId>
+		</dependency>
 	</dependencies>
 </project>
