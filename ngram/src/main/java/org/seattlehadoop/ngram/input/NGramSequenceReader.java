@@ -1,4 +1,4 @@
-package org.seattlehadoop.ngram;
+package org.seattlehadoop.ngram.input;
 
 import java.io.File;
 import java.io.IOException;

@@ -2,7 +2,7 @@ package org.seattlehadoop.ngram;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.seattlehadoop.ngram.NGramZipInputConverter.writeOut;
+import static org.seattlehadoop.ngram.input.NGramZipInputConverter.writeOut;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
+import org.seattlehadoop.ngram.input.TokenAndCounts;
 
 import com.google.common.io.Files;
 

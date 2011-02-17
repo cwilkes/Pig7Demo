@@ -1,4 +1,4 @@
-package org.seattlehadoop.ngram;
+package org.seattlehadoop.ngram.input;
 
 import java.util.ArrayList;
 import java.util.List;

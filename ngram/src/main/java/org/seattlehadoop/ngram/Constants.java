@@ -6,6 +6,8 @@ import org.apache.hadoop.hbase.util.Bytes;
 
 public class Constants {
 
+	public static char TAB = '\t';
+
 	public static String TABLE_NAME = "tokens";
 	public static byte[] COLUMN_FAMILY = Bytes.toBytes("details");
 

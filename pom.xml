@@ -8,8 +8,7 @@
 	<packaging>pom</packaging>
 	<modules>
 		<!-- <module>sh-demo-pigloadfunc</module> <module>cascading</module> -->
-		<module>sh-demo-mahout</module>
-		<module>text-fingerprints</module>
+		<module>sh-demo-mahout</module>	
 		<module>ngram</module>
 	</modules>
 	<properties>
@@ -77,7 +76,7 @@
 				<groupId>org.apache.hadoop</groupId>
 				<artifactId>hadoop-core</artifactId>
 				<version>${hadoop.version}</version>
-			</dependency>			
+			</dependency>
 			<dependency>
 				<groupId>com.cloudera.hadoop</groupId>
 				<artifactId>hadoop-mrunit</artifactId>
@@ -107,18 +106,18 @@
 			<dependency>
 				<groupId>com.google.guava</groupId>
 				<artifactId>guava</artifactId>
-				<version>r07</version>
-			</dependency>
-			<dependency>
-				<groupId>junit</groupId>
-				<artifactId>junit</artifactId>
-				<version>4.8.1</version>
-				<type>jar</type>
-				<scope>test</scope>
+				<version>r08</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.1</version>
+			<type>jar</type>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.easymock</groupId>
 			<artifactId>easymock</artifactId>

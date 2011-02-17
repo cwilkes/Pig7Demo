@@ -8,7 +8,7 @@ public class ClientImplTest {
 
 	@Test
 	public void testHitServer() throws IOException {
-		Client client = new ClientImpl("aspire.internal.ladro.com");
+		Client client = new ClientImpl("localhost");
 		System.out.println(client.getTrailingWords("wily"));
 	}
 }

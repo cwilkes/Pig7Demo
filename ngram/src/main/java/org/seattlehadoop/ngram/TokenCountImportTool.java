@@ -2,6 +2,8 @@ package org.seattlehadoop.ngram;
 
 import static org.seattlehadoop.ngram.Constants.TABLE_NAME;
 
+import java.io.IOException;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.hbase.mapreduce.TableMapReduceUtil;
@@ -27,13 +29,11 @@ public class TokenCountImportTool implements Tool {
 		return m_conf;
 	}
 
-	@Override
-	public int run(String[] p_args) throws Exception {
+	protected Job makeJob(Path input, Path output) throws IOException {
 		Job job = new Job(getConf());
 		job.setInputFormatClass(SequenceFileInputFormat.class);
-		int i = 0;
-		SequenceFileInputFormat.setInputPaths(job, new Path(p_args[i++]));
-		SequenceFileOutputFormat.setOutputPath(job, new Path(p_args[i++]));
+		SequenceFileInputFormat.setInputPaths(job, input);
+		SequenceFileOutputFormat.setOutputPath(job, output);
 		Constants.setQuorum(job.getConfiguration(), "localhost");
 		job.setMapOutputKeyClass(Text.class);
 		job.setMapOutputValueClass(Text.class);
@@ -47,8 +47,14 @@ public class TokenCountImportTool implements Tool {
 		job.setCombinerClass(TokenCountImportCombiner.class);
 		TableMapReduceUtil.initTableReducerJob(TABLE_NAME, TokenCountImportReducer.class, job);
 		Constants.setHostName(job.getConfiguration(), "localhost");
+		return job;
+	}
+
+	@Override
+	public int run(String[] p_args) throws Exception {
+		int i = 0;
+		Job job = makeJob(new Path(p_args[i++]), new Path(p_args[i++]));
 		job.submit();
-		job.waitForCompletion(true);
 		return 0;
 	}
 

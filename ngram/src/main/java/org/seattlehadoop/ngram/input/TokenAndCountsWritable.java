@@ -1,4 +1,4 @@
-package org.seattlehadoop.ngram;
+package org.seattlehadoop.ngram.input;
 
 import static org.apache.hadoop.io.WritableUtils.readString;
 import static org.apache.hadoop.io.WritableUtils.writeString;

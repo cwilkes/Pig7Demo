@@ -7,6 +7,8 @@ import java.io.StringReader;
 import java.util.Iterator;
 
 import org.junit.Test;
+import org.seattlehadoop.ngram.input.RawNGramReader;
+import org.seattlehadoop.ngram.input.TokenAndCounts;
 
 public class NGramReaderTest {
 

@@ -1,4 +1,4 @@
-package org.seattlehadoop.ngram;
+package org.seattlehadoop.ngram.input;
 
 import java.io.BufferedReader;
 import java.io.Closeable;
@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.Iterator;
 import java.util.zip.ZipInputStream;
+
 
 public class RawNGramReader implements Iterator<TokenAndCounts>, Closeable {
 
