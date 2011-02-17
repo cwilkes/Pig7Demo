@@ -1,8 +1,9 @@
 package org.seattlehadoop.ngram;
 
+import static org.seattlehadoop.ngram.Constants.TABLE_NAME;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.hbase.HConstants;
 import org.apache.hadoop.hbase.mapreduce.TableMapReduceUtil;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
@@ -33,7 +34,7 @@ public class TokenCountImportTool implements Tool {
 		int i = 0;
 		SequenceFileInputFormat.setInputPaths(job, new Path(p_args[i++]));
 		SequenceFileOutputFormat.setOutputPath(job, new Path(p_args[i++]));
-		job.getConfiguration().set(HConstants.ZOOKEEPER_QUORUM, "localhost");
+		Constants.setQuorum(job.getConfiguration(), "localhost");
 		job.setMapOutputKeyClass(Text.class);
 		job.setMapOutputValueClass(Text.class);
 		job.setMapperClass(TokenCountImportMapper.class);
@@ -44,10 +45,10 @@ public class TokenCountImportTool implements Tool {
 		job.setOutputValueClass(IntWritable.class);
 		job.setNumReduceTasks(2);
 		job.setCombinerClass(TokenCountImportCombiner.class);
-		TableMapReduceUtil.initTableReducerJob("tokens", TokenCountImportReducer.class, job);
-		job.getConfiguration().set("hbase.zookeeper.property.server.foo", "localhost:bar");
-		job.submit();		
-		job.waitForCompletion(true);		
+		TableMapReduceUtil.initTableReducerJob(TABLE_NAME, TokenCountImportReducer.class, job);
+		Constants.setHostName(job.getConfiguration(), "localhost");
+		job.submit();
+		job.waitForCompletion(true);
 		return 0;
 	}
 

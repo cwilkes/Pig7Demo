@@ -1,5 +1,7 @@
 package org.seattlehadoop.ngram;
 
+import static org.seattlehadoop.ngram.Constants.COLUMN_FAMILY;
+
 import org.apache.hadoop.hbase.client.Put;
 import org.apache.hadoop.hbase.mapreduce.TableReducer;
 import org.apache.hadoop.hbase.util.Bytes;
@@ -8,7 +10,6 @@ import org.apache.hadoop.io.Writable;
 
 public class TokenCountImportReducer extends TableReducer<Text, Text, Text> {
 
-	public static byte[] COLUMN_FAMILY = Bytes.toBytes("details");
 	private static final Text OUTPUT_KEY = new Text("out");
 
 	@Override
