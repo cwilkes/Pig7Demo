@@ -29,5 +29,9 @@
 			<groupId>com.cloudera.hadoop</groupId>
 			<artifactId>hadoop-mrunit</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.zookeeper</groupId>
+			<artifactId>zookeeper</artifactId>
+		</dependency>
 	</dependencies>
 </project>

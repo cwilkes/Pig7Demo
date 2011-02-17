@@ -1,34 +1,18 @@
 package org.seattlehadoop.ngram;
 
-import org.apache.hadoop.hbase.client.HTable;
-import org.apache.hadoop.hbase.client.HTableInterface;
 import org.apache.hadoop.hbase.client.Put;
+import org.apache.hadoop.hbase.mapreduce.TableReducer;
 import org.apache.hadoop.hbase.util.Bytes;
-import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
-import org.apache.hadoop.mapreduce.Reducer;
+import org.apache.hadoop.io.Writable;
 
-public class TokenCountImportReducer extends Reducer<Text, Text, Text, IntWritable> {
+public class TokenCountImportReducer extends TableReducer<Text, Text, Text> {
 
-	private HTableInterface m_htable;
 	public static byte[] COLUMN_FAMILY = Bytes.toBytes("details");
+	private static final Text OUTPUT_KEY = new Text("out");
 
 	@Override
-	protected void setup(org.apache.hadoop.mapreduce.Reducer<Text, Text, Text, IntWritable>.Context context) throws java.io.IOException, InterruptedException {
-		m_htable = new HTable(context.getConfiguration(), "tokens");
-	};
-
-	/**
-	 * Only for unit testing
-	 * 
-	 * @param p_htable
-	 */
-	void setHtable(HTableInterface p_htable) {
-		m_htable = p_htable;
-	}
-
-	@Override
-	protected void reduce(Text key, java.lang.Iterable<Text> values, org.apache.hadoop.mapreduce.Reducer<Text, Text, Text, IntWritable>.Context context)
+	protected void reduce(Text key, java.lang.Iterable<Text> values, org.apache.hadoop.mapreduce.Reducer<Text, Text, Text, Writable>.Context context)
 			throws java.io.IOException, InterruptedException {
 		String[] keyParts = key.toString().split("\\t");
 		String firstWord = keyParts[0];
@@ -43,11 +27,7 @@ public class TokenCountImportReducer extends Reducer<Text, Text, Text, IntWritab
 				put.add(COLUMN_FAMILY, Bytes.toBytes(secondWord), Bytes.toBytes(count));
 			}
 		}
-		m_htable.put(put);
+		context.write(OUTPUT_KEY, put);
 	};
 
-	@Override
-	protected void cleanup(org.apache.hadoop.mapreduce.Reducer<Text, Text, Text, IntWritable>.Context context) throws java.io.IOException, InterruptedException {
-		m_htable.close();
-	};
 }
