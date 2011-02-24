@@ -1,0 +1,15 @@
+{ "type" : "record",
+ "namespace" : "org.seattlehadoop.ngram.avro",
+ "name" : "TokenSingleCount",
+ "fields" : [ 
+ {
+   "name" : "phrase",
+   "type" : "string"
+ },
+ {
+   "name" : "count",
+   "type" : "int"
+ }
+ ]
+}
+   

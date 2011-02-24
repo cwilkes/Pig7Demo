@@ -9,8 +9,6 @@
 	</parent>
 	<groupId>org.seattlehadoop</groupId>
 	<artifactId>ngram</artifactId>
-	<version>1.0-SNAPSHOT</version>
-	<name>ngram</name>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.hbase</groupId>
@@ -27,6 +25,18 @@
 		<dependency>
 			<groupId>org.apache.zookeeper</groupId>
 			<artifactId>zookeeper</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.seattlehadoop</groupId>
+			<artifactId>ngram-avro</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.avro</groupId>
+			<artifactId>avro</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>		
 		</dependency>
 	</dependencies>
 </project>

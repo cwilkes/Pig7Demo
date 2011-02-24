@@ -7,14 +7,14 @@ import java.io.StringReader;
 import java.util.Iterator;
 
 import org.junit.Test;
-import org.seattlehadoop.ngram.input.RawNGramReader;
+import org.seattlehadoop.ngram.input.NGramRawInputReader;
 import org.seattlehadoop.ngram.input.TokenAndCounts;
 
 public class NGramReaderTest {
 
 	@Test
 	public void testOneLine() throws IOException {
-		Iterator<TokenAndCounts> it = new RawNGramReader(new StringReader("circumvallate\t1978\t313\t215\t85"));
+		Iterator<TokenAndCounts> it = new NGramRawInputReader(new StringReader("circumvallate\t1978\t313\t215\t85"));
 		assertTrue(it.hasNext());
 		TokenAndCounts tc = it.next();
 		assertEquals("circumvallate", tc.getToken());
@@ -30,7 +30,7 @@ public class NGramReaderTest {
 
 	@Test
 	public void testTwoLines() throws IOException {
-		Iterator<TokenAndCounts> it = new RawNGramReader(new StringReader("circumvallate\t1978\t313\t215\t85\ncircumvallate\t1979\t183\t147\t77"));
+		Iterator<TokenAndCounts> it = new NGramRawInputReader(new StringReader("circumvallate\t1978\t313\t215\t85\ncircumvallate\t1979\t183\t147\t77"));
 		assertTrue(it.hasNext());
 		TokenAndCounts tc = it.next();
 		assertEquals("circumvallate", tc.getToken());
@@ -52,7 +52,7 @@ public class NGramReaderTest {
 
 	@Test
 	public void testTwoTokens() throws IOException {
-		Iterator<TokenAndCounts> it = new RawNGramReader(new StringReader("circumvallate\t1978\t313\t215\t85\ncircumvallate\t1979\t183\t147\t77\na\t1\t2\t3\t4"));
+		Iterator<TokenAndCounts> it = new NGramRawInputReader(new StringReader("circumvallate\t1978\t313\t215\t85\ncircumvallate\t1979\t183\t147\t77\na\t1\t2\t3\t4"));
 		assertTrue(it.hasNext());
 		TokenAndCounts tc = it.next();
 		System.out.println(tc);

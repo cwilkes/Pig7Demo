@@ -1,0 +1,27 @@
+{ "type" : "record",
+ "namespace" : "org.seattlehadoop.ngram.avro",
+ "name" : "TokenCount",
+ "fields" : [ 
+ {
+   "name" : "token",
+   "type" : "string"
+ },
+ {
+   "name" : "year",
+   "type" : "int"
+ }, 
+ {
+   "name" : "matchCount",
+   "type" : "int"
+ },
+ {
+   "name" : "pageCount",
+   "type" : "int"
+ },
+ {
+   "name" : "volumeCount",
+   "type" : "int"
+ }
+ ]
+}
+   

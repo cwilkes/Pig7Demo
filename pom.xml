@@ -8,14 +8,14 @@
 	<packaging>pom</packaging>
 	<modules>
 		<!-- <module>sh-demo-pigloadfunc</module> <module>cascading</module> -->
-		<module>sh-demo-mahout</module>	
+		<module>sh-demo-mahout</module>
 		<module>ngram</module>
 	</modules>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<hadoop.version>0.20.2</hadoop.version>
-		<jackson.version>1.0.1</jackson.version>
-		<cascading.version>1.1.2</cascading.version>
+		<jackson.version>1.5.1</jackson.version>
+		<cascading.version>1.1.2</cascading.version>		
 	</properties>
 
 	<build>
@@ -28,7 +28,30 @@
 					<target>1.6</target>
 				</configuration>
 			</plugin>
+			<plugin>
+				<inherited>true</inherited>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.avro</groupId>
+					<artifactId>avro-maven-plugin</artifactId>
+					<version>1.0-SNAPSHOT</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 	<dependencyManagement>
 		<dependencies>
@@ -87,6 +110,22 @@
 				<groupId>org.apache.hbase</groupId>
 				<artifactId>hbase</artifactId>
 				<version>0.89.20100924-28</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.apache.hadoop</groupId>
+						<artifactId>avro</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.avro</groupId>
+				<artifactId>avro</artifactId>
+				<version>1.4.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-core-asl</artifactId>
+				<version>1.5.2</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.thrift</groupId>
@@ -108,6 +147,16 @@
 				<artifactId>guava</artifactId>
 				<version>r08</version>
 			</dependency>
+			<dependency>
+				<groupId>org.apache.avro</groupId>
+				<artifactId>avro-maven-plugin</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.seattlehadoop</groupId>
+				<artifactId>ngram-avro</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>
@@ -126,5 +175,4 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
 </project>

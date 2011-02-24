@@ -1,0 +1,22 @@
+{ "type" : "record",
+ "namespace" : "org.seattlehadoop.ngram.avro",
+ "name" : "GroupedToken",
+ "fields" : [ 
+ {
+   "name" : "firstPhrase",
+   "type" : "string"
+ },
+  {
+   "name" : "secondPhrase",
+   "type" : "string"
+ },
+ {
+   "name" : "byYear",
+   "type" : {
+   	"type" :"map",
+   	"values" : "int"
+   }
+ }
+ ]
+}
+   

@@ -16,6 +16,8 @@ import org.apache.hadoop.mrunit.mapreduce.ReduceDriver;
 import org.apache.hadoop.mrunit.types.Pair;
 import org.junit.Before;
 import org.junit.Test;
+import org.seattlehadoop.ngram.mapreduce.Constants;
+import org.seattlehadoop.ngram.mapreduce.TokenCountImportReducer;
 
 public class TokenCountImportReducerTest {
 

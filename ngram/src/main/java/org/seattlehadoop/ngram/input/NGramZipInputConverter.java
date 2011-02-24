@@ -96,6 +96,6 @@ public class NGramZipInputConverter {
 		}
 		int numberTokensPerFile = Integer.parseInt(args[pos++]);	
 		System.err.println("Reading in " + in.getAbsolutePath());
-		writeOut(new RawNGramReader(in, 1900, 2000), outDir, numberTokensPerFile);
+		writeOut(new NGramRawInputReader(in, 1900, 2000), outDir, numberTokensPerFile);
 	}
 }
